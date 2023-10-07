@@ -1,19 +1,25 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
-//code
-//code 2
+int ledPin = 13; //integrated LED
+int serialData;
+
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(9600);  //initialize serial comms
+
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  if (Serial.available() > 0) {
+    Serial.print("Estoy aqui");
+    serialData = Serial.read();
+    if(serialData == '1'){
+      digitalWrite(ledPin, HIGH);
+    }
+    else {
+      digitalWrite(ledPin, LOW);
+    }
+  }
+  delay(100);
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
 }
