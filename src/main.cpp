@@ -1,9 +1,6 @@
 #include <Arduino.h>
+#include <FlexyStepper.h>
 
-// put function declarations here:
-int myFunction(int, int);
-//code
-//code 2
 void setup() {
   // put your setup code here, to run once:
   int result = myFunction(2, 3);
