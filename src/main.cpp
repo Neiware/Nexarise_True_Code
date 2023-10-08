@@ -35,6 +35,9 @@ void loop() {
       digitalWrite(ledPin, HIGH);
       delay(1500);
       digitalWrite(ledPin, LOW);
+
+      Serial.println("1");
+      delay(100);
     }
   }
   delay(100);
