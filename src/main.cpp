@@ -43,3 +43,45 @@ void loop() {
   delay(100);
 
 }
+
+class CommunicationUI
+{
+private:
+  /* data */
+  char receivedData[50]; // Buffer to store received data
+
+public:
+  CommunicationUI(/* args */);
+  ~CommunicationUI();
+
+  void Read(){}
+  void Send(){}
+
+
+};
+
+CommunicationUI::CommunicationUI(/* args */)
+{
+}
+
+CommunicationUI::~CommunicationUI()
+{
+}
+
+
+class Grua
+{
+private:
+  /* data */
+public:
+  Grua(/* args */);
+  ~Grua();
+};
+
+Grua::Grua(/* args */)
+{
+}
+
+Grua::~Grua()
+{
+}
