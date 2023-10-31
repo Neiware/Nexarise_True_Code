@@ -18,7 +18,15 @@ FlexyStepper stepperX;
 FlexyStepper stepperY;
 FlexyStepper stepperZ;
 
-
+void MoveMotorNumerOfMilimeters(FlexyStepper stepper, float NumberMilimeters)
+{
+  stepper.setSpeedInMillimetersPerSecond(50);
+  stepper.setAccelerationInMillimetersPerSecondPerSecond(100);
+  stepper.moveToPositionInMillimeters(NumberMilimeters);
+  delay(2000);
+  stepper.moveToPositionInMillimeters(0);
+  delay(2000);
+}
 void setup() {
    //
   // setup the LED pin and enable print statements
@@ -48,19 +56,10 @@ void loop() {
   // Movimiento de Motor X
   
   Serial.println("Motor X corriendo");
-  MoveMotorNumerOfMilimeters(stepperX, 50);
+  MoveMotorNumerOfMilimeters(stepperX, 500);
   Serial.println("Motor Y corriendo");
-  MoveMotorNumerOfMilimeters(stepperY, 70);
+  MoveMotorNumerOfMilimeters(stepperY, 100);
   Serial.println("Motor Z corriendo");
   MoveMotorNumerOfMilimeters(stepperZ, 10);
 }
 
-void MoveMotorNumerOfMilimeters(FlexyStepper stepper, float NumberMilimeters)
-{
-  stepper.setSpeedInMillimetersPerSecond(20);
-  stepper.setAccelerationInMillimetersPerSecondPerSecond(20);
-  stepper.moveToPositionInMillimeters(NumberMilimeters);
-  delay(2000);
-  stepper.moveToPositionInMillimeters(0);
-  delay(2000);
-}
