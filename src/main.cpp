@@ -2,6 +2,9 @@
 #include "CommunicationUI.h"
 
 
+const int BUFFER_SIZE = 100;
+char buf[BUFFER_SIZE];
+
 const int LED_PIN = 13;
 const int ledPin = 13; // Pin number connected to the LED
 //iniziatilar Objetos
@@ -17,6 +20,16 @@ void setup() {
 }
 
 void loop() {
+  // if (Serial.available() > 0) {
+  //   // read the incoming bytes:
+  //   Serial.print("porqeu");
+  //   int rlen = Serial.readBytesUntil('\n', buf, BUFFER_SIZE);
+
+  //   // prints the received data
+  //   Serial.print("I received: ");
+  //   for(int i = 0; i < rlen; i++)
+  //     Serial.print(buf[i]);
+  // }
   if(comunicador.ReadAvailable())
   {
     //Modo de Operacion.

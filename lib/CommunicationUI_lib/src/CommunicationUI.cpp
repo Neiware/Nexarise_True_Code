@@ -32,13 +32,21 @@
 
   bool CommunicationUI::ReadAvailable()
   {
-    if (Serial.available() <= 0)
+    bool respone = false;
+    while (respone == false)
     {
-      return false;
+
+      if (Serial.available() > 0)
+      {
+        Serial.println("after readbyte");
+        Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
+        ProcessData(ReceivedData);
+         respone = true;
+      }
+      /* code */
     }
-    Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
-    ProcessData(ReceivedData);
-    return true;
+    return respone;
+    
     //Data Incoming Template
     // Mode:Stepper:Milimeters:Extra;
     // Mode:x:y:z;
