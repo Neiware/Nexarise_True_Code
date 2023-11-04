@@ -4,47 +4,60 @@
   void CommunicationUI::FillData()
   {
     String Data[3] = {value2Str,value3Str,value4Str};
-    switch (mode)
+    if (mode == "A")
     {
-    case 'A':
-      /* code */
-      eje = Data[0].charAt(0);
-      milimeters = Data[1].toFloat();
-      break;
-    case 'M':
-      /* code */
-      eje = Data[0].charAt(0);
-      milimeters = Data[1].toFloat();
-      break;
-    case 'S':
-      /* code */
-      for (int i = 0; i < 3; i++)
-      {
-        stepsPerMilimeter[i] = Data[i].toInt(); 
-      }
-      break;
-
-    default:
-      break;
+      eje = Data[0];
     }
+    else if (mode == "M")
+    {
+      milimeters = Data[2];
+    }
+    else if(mode == "S")
+    {
+      /* code */
+    }else{
+
+    }
+    
+    // switch (mode.ch)
+    // {
+    // case 'A':
+    //   /* code */
+    //   eje = Data[0].charAt(0);
+  
+    //   milimeters = Data[1].toFloat();
+    //   break;
+    // case 'M':
+    //   /* code */
+    //   eje = Data[0].charAt(0);
+    //   milimeters = Data[1].toFloat();
+    //   break;
+    // case 'S':
+    //   /* code */
+    //   for (int i = 0; i < 3; i++)
+    //   {
+    //     stepsPerMilimeter[i] = Data[i].toInt(); 
+    //   }
+    //   break;
+
+    // default:
+    //   break;
+    // }
   }
 
 
-  bool CommunicationUI::ReadAvailable()
+  void CommunicationUI::ReadAvailable( )
   {
-    bool respone = false;
-    while (respone == false)
-    {
-
-      if (Serial.available() > 0)
-      {
-        Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
-        ProcessData(ReceivedData);
-         respone = true;
-      }
       /* code */
-    }
-    return respone;
+    Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
+    ProcessData(ReceivedData);
+    // FillData();
+      // for(int i = 0; i < test; i++){
+      //   Serial.print(ReceivedData[i]);
+      // }
+
+    
+    
     
     //Data Incoming Template
     // Mode:Stepper:Milimeters:Extra;
@@ -63,14 +76,35 @@
     int delimiterPos3 = dataString.indexOf(':', delimiterPos2 + 1);
 
     if (delimiterPos1 != -1 && delimiterPos2 != -1 && delimiterPos3 != -1) {
-      String value1Str = dataString.substring(0, delimiterPos1);
-      value2Str = dataString.substring(delimiterPos1 + 1, delimiterPos2);
-      value3Str = dataString.substring(delimiterPos2 + 1, delimiterPos3);
-      value4Str = dataString.substring(delimiterPos3 + 1);
-      mode = value1Str.charAt(0);
-      mode = (char)toupper(mode);
+      mode = dataString.substring(0, delimiterPos1);
+      eje = dataString.substring(delimiterPos1 + 1, delimiterPos2);
+      milimeters = dataString.substring(delimiterPos2 + 1, delimiterPos3);
+      status = dataString.substring(delimiterPos3 + 1);
+      // mode = value1Str.charAt(0);
+      // mode = (char)toupper(mode);
+      // eje = value2Str.charAt(0);
+      // eje = (char)toupper(eje);
+      // milimeters = value3Str.toInt();
+      // status = value4Str;
     }
   }
+
+  void CommunicationUI::TestReceivedData(){
+    bool respone = false;
+    while (respone == false)
+    {
+
+      if (Serial.available() > 0)
+      {
+        int test = Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
+        for(int i = 0; i < test; i++){
+          Serial.print(ReceivedData[i]);
+        }
+      }
+      /* code */
+    }
+  }
+
 
 
 

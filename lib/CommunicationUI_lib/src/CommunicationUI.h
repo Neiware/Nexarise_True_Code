@@ -10,7 +10,8 @@ class CommunicationUI
 {
 private:
   /* data */
-  char ReceivedData[50]; // Buffer to store received data
+  const int BUFFER_SIZE = 100;
+  char buf[100];
   String Ready = "Ready";
   String value2Str;
   String value3Str;
@@ -19,17 +20,18 @@ private:
   void FillData();
 
 public:
-  char mode;
-  char eje;
-  float milimeters;
+  char ReceivedData[50]; // Buffer to store received data
+  String mode;
+  String eje;
+  String milimeters;
   String status;
   int stepsPerMilimeter[3];
 
   CommunicationUI();
-  bool ReadAvailable();
+  void ReadAvailable();
   void Send();
   void ProcessData(char receivedData[50]);
-
+  void TestReceivedData();
 
 };
 

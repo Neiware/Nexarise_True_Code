@@ -1,7 +1,13 @@
 #include "Grua.h"
 
 //Constructor
-  Grua::Grua(float StepsPerMilimeterX, float StepsPerMilimeterY, float StepsPerMilimeterZ)
+  Grua::Grua()
+  {
+    
+
+
+  }
+  void Grua::Inicializar()
   {
     pinMode(STEPPERS_ENABLE_PIN, OUTPUT);       // be sure to do this
 
@@ -10,47 +16,77 @@
     ejeZ.connectToPins(MOTOR_Z_STEP_PIN, MOTOR_Z_DIR_PIN);
 
     digitalWrite(STEPPERS_ENABLE_PIN, LOW);     // be sure to do this
-
-    ejeX.setStepsPerMillimeter(StepsPerMilimeterX);
+    
+    ejeX.setStepsPerMillimeter(getStepsPerMilimeterX());
     ejeY.setStepsPerMillimeter(StepsPerMilimeterY);
     ejeZ.setStepsPerMillimeter(StepsPerMilimeterZ);
-
+    // Serial.print(StepsPerMilimeterX);
+    // Serial.println(StepsPerMilimeterY);
   }
 
-  int Grua::MoveInMilimeters(char eje, float milimeters)
+  int Grua::MoveInMilimeters(String eje, String milimeters)
   {
-    eje = (char)toupper(eje);
     int response;
-     switch (eje)
-     {
-     case 'X':
-      ejeX.moveToPositionInMillimeters(milimeters);
+    if (eje == "X")
+    {
+      /* code */
+      ejeX.moveToPositionInMillimeters(milimeters.toFloat());
       response = 1;
-      break;
-     case 'Y':
-      ejeY.moveToPositionInMillimeters(milimeters);
+    }
+    else if (eje == "Y")
+    {
+      /* code */
+      ejeY.moveToPositionInMillimeters(milimeters.toFloat());
       response = 1;
-      break;
-     case 'z':
-      ejeZ.moveToPositionInMillimeters(milimeters);
+    }
+    else if(eje == "Z")
+    {
+      /* code */
+      ejeZ.moveToPositionInMillimeters(milimeters.toFloat());
       response = 1;
-      break;
-     default:
-     //If something Wrong return 0
+    }else{
       response = 0;
-      break;
-     delay(300);
-     return response;
-     }
+    }
+    delay(300);
+    return response;
+
+    //  switch (eje)
+    //  {
+    //  case 'X':
+    //   ejeX.moveToPositionInMillimeters(milimeters);
+    //   response = 1;
+    //   break;
+    //  case 'Y':
+    //   ejeY.moveToPositionInMillimeters(milimeters);
+    //   response = 1;
+    //   break;
+    //  case 'z':
+    //   ejeZ.moveToPositionInMillimeters(milimeters);
+    //   response = 1;
+    //   break;
+    //  default:
+    //  //If something Wrong return 0
+    //   response = 0;
+    //   break;
+    //  delay(300);
+    //  return response;
+    //  }
   }
 
-  void Grua::SetSpeed(int x = 40, int y = 40, int z = 20)
-  {
-    FlexyStepper stepper[3] = {ejeX,ejeY,ejeZ};
-    int arrayVel[3] = {x,y,z};
-    for (int i = 0; i < 3; i++)
-    {
-      stepper[i].setSpeedInMillimetersPerSecond(arrayVel[i]);
-    }
+  float Grua::getStepsPerMilimeterX(){
+    return StepsPerMilimeterX;
   }
+  void Grua::setStepsPerMilimeterX(float value){
+    StepsPerMilimeterX = value;
+  }
+
+  // void Grua::SetSpeed(int x = 40, int y = 40, int z = 20)
+  // {
+  //   FlexyStepper stepper[3] = {ejeX,ejeY,ejeZ};
+  //   int arrayVel[3] = {x,y,z};
+  //   for (int i = 0; i < 3; i++)
+  //   {
+  //     stepper[i].setSpeedInMillimetersPerSecond(arrayVel[i]);
+  //   }
+  // }
 
