@@ -32,26 +32,27 @@ void loop() {
   // }
   if(comunicador.ReadAvailable())
   {
+    Serial.println(comunicador.eje);
     //Modo de Operacion.
-    int response;
-    switch (comunicador.mode)
-    {
-    case 'A':
-      /* code */
-      response = gruaNexArise.MoveInMilimeters(comunicador.eje, comunicador.milimeters);
-      break;
-    case 'M':
-      /* code */
-      response = gruaNexArise.MoveInMilimeters(comunicador.eje, comunicador.milimeters);
-      break;
-    case 'S':
-      /* code */
-      gruaNexArise.SetSpeed(comunicador.stepsPerMilimeter[0],comunicador.stepsPerMilimeter[1],comunicador.stepsPerMilimeter[2]);
-      break;
+    // int response;
+    // switch (comunicador.mode)
+    // {
+    // case 'A':
+    //   /* code */
+    //   response = gruaNexArise.MoveInMilimeters(comunicador.eje, comunicador.milimeters);
+    //   break;
+    // case 'M':
+    //   /* code */
+    //   response = gruaNexArise.MoveInMilimeters(comunicador.eje, comunicador.milimeters);
+    //   break;
+    // case 'S':
+    //   /* code */
+    //   gruaNexArise.SetSpeed(comunicador.stepsPerMilimeter[0],comunicador.stepsPerMilimeter[1],comunicador.stepsPerMilimeter[2]);
+    //   break;
 
-    default:
-      break;
-    }
+    // default:
+    //   break;
+    // }
 
 
   }

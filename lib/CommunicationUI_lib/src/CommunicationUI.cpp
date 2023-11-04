@@ -38,7 +38,6 @@
 
       if (Serial.available() > 0)
       {
-        Serial.println("after readbyte");
         Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
         ProcessData(ReceivedData);
          respone = true;
@@ -49,7 +48,7 @@
     
     //Data Incoming Template
     // Mode:Stepper:Milimeters:Extra;
-    // Mode:x:y:z;
+    // Mode:x:y:z:prueba
 
     //Tipos de Modos. A = Automatico. M = Manual. S = SetSpeed.
 
