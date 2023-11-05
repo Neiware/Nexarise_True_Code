@@ -3,65 +3,45 @@
   CommunicationUI::CommunicationUI(){};
   void CommunicationUI::FillData()
   {
-    String Data[3] = {value2Str,value3Str,value4Str};
-    if (mode == "A")
+    if (mode == "Automatico")
     {
-      eje = Data[0];
+      eje = value2Str;
+      milimeters = value3Str.toFloat();
     }
-    else if (mode == "M")
+    else if (mode == "Manual")
     {
-      milimeters = Data[2];
+      milimeters = value3Str.toFloat();
     }
-    else if(mode == "S")
+    else if(mode == "Vel")
     {
-      /* code */
-    }else{
+      speedMilimetersPerSecond[0] = value2Str.toFloat();
+      speedMilimetersPerSecond[1] = value3Str.toFloat();
+      speedMilimetersPerSecond[2] = value4Str.toFloat();
+    }else if(mode =="Ace")
+      {
+      accelerationPerSecondPerSecond[0] = value2Str.toFloat();
+      accelerationPerSecondPerSecond[1] = value3Str.toFloat();
+      accelerationPerSecondPerSecond[2] = value4Str.toFloat();
+
+    }else
+    {
 
     }
     
-    // switch (mode.ch)
-    // {
-    // case 'A':
-    //   /* code */
-    //   eje = Data[0].charAt(0);
-  
-    //   milimeters = Data[1].toFloat();
-    //   break;
-    // case 'M':
-    //   /* code */
-    //   eje = Data[0].charAt(0);
-    //   milimeters = Data[1].toFloat();
-    //   break;
-    // case 'S':
-    //   /* code */
-    //   for (int i = 0; i < 3; i++)
-    //   {
-    //     stepsPerMilimeter[i] = Data[i].toInt(); 
-    //   }
-    //   break;
-
-    // default:
-    //   break;
-    // }
   }
 
 
-  void CommunicationUI::ReadAvailable( )
+  void CommunicationUI::ReadData( )
   {
-      /* code */
+    //Data Incoming Template
+    // Mode : EjeStepper : numMilimeters : Extra;
+    // Automatico:X:50:prueba
     Serial.readBytesUntil('\n', ReceivedData, sizeof(ReceivedData));
     ProcessData(ReceivedData);
-    // FillData();
-      // for(int i = 0; i < test; i++){
-      //   Serial.print(ReceivedData[i]);
-      // }
-
+    FillData();
     
     
     
-    //Data Incoming Template
-    // Mode:Stepper:Milimeters:Extra;
-    // Mode:x:y:z:prueba
 
     //Tipos de Modos. A = Automatico. M = Manual. S = SetSpeed.
 
@@ -77,9 +57,9 @@
 
     if (delimiterPos1 != -1 && delimiterPos2 != -1 && delimiterPos3 != -1) {
       mode = dataString.substring(0, delimiterPos1);
-      eje = dataString.substring(delimiterPos1 + 1, delimiterPos2);
-      milimeters = dataString.substring(delimiterPos2 + 1, delimiterPos3);
-      status = dataString.substring(delimiterPos3 + 1);
+      value2Str = dataString.substring(delimiterPos1 + 1, delimiterPos2);
+      value3Str = dataString.substring(delimiterPos2 + 1, delimiterPos3);
+      value4Str = dataString.substring(delimiterPos3 + 1);
       // mode = value1Str.charAt(0);
       // mode = (char)toupper(mode);
       // eje = value2Str.charAt(0);
@@ -105,6 +85,20 @@
     }
   }
 
+  //GETTERS AND SETTERS
+  String CommunicationUI::GetEje(){
+    return eje;
+  }
+  
+  float CommunicationUI::GetMilimeters()
+  {
+    return milimeters.toFloat();
+  }
+
+  String  CommunicationUI::GetMode()
+  {
+    return mode;
+  }
 
 
 

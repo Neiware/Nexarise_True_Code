@@ -17,21 +17,26 @@ private:
   String value3Str;
   String value4Str;
 
-  void FillData();
-
-public:
   char ReceivedData[50]; // Buffer to store received data
   String mode;
   String eje;
   String milimeters;
   String status;
   int stepsPerMilimeter[3];
+  float speedMilimetersPerSecond[3];
+  float accelerationPerSecondPerSecond[3];
+  void FillData();
+
+public:
 
   CommunicationUI();
-  void ReadAvailable();
+  void ReadData();
   void Send();
   void ProcessData(char receivedData[50]);
   void TestReceivedData();
+  String GetEje();
+  float GetMilimeters();
+  String GetMode();
 
 };
 

@@ -3,12 +3,7 @@
 //Constructor
   Grua::Grua()
   {
-    
-
-
-  }
-  void Grua::Inicializar()
-  {
+      
     pinMode(STEPPERS_ENABLE_PIN, OUTPUT);       // be sure to do this
 
     ejeX.connectToPins(MOTOR_X_STEP_PIN, MOTOR_X_DIR_PIN);
@@ -16,33 +11,44 @@
     ejeZ.connectToPins(MOTOR_Z_STEP_PIN, MOTOR_Z_DIR_PIN);
 
     digitalWrite(STEPPERS_ENABLE_PIN, LOW);     // be sure to do this
-    
-    ejeX.setStepsPerMillimeter(getStepsPerMilimeterX());
-    ejeY.setStepsPerMillimeter(StepsPerMilimeterY);
-    ejeZ.setStepsPerMillimeter(StepsPerMilimeterZ);
-    // Serial.print(StepsPerMilimeterX);
-    // Serial.println(StepsPerMilimeterY);
+
+    ejeX.setStepsPerMillimeter(25 * 1);
+    ejeY.setStepsPerMillimeter(25 * 1);
+    ejeZ.setStepsPerMillimeter(25 * 1);
+  }
+  void Grua::Inicializar()
+  {
+
   }
 
-  int Grua::MoveInMilimeters(String eje, String milimeters)
+  int Grua::MoveInMilimeters(String eje, float milimeters)
   {
     int response;
     if (eje == "X")
     {
       /* code */
-      ejeX.moveToPositionInMillimeters(milimeters.toFloat());
+      // ejeX.setStepsPerMillimeter(25 * 1);
+      ejeX.setSpeedInMillimetersPerSecond(9.0);
+      ejeX.setAccelerationInMillimetersPerSecondPerSecond(10.0);
+      ejeX.moveToPositionInMillimeters(milimeters);
       response = 1;
     }
     else if (eje == "Y")
     {
       /* code */
-      ejeY.moveToPositionInMillimeters(milimeters.toFloat());
+      // ejeY.setStepsPerMillimeter(25 * 1);
+      ejeY.setSpeedInMillimetersPerSecond(9.0);
+      ejeY.setAccelerationInMillimetersPerSecondPerSecond(10.0);
+      ejeY.moveToPositionInMillimeters(milimeters);
       response = 1;
     }
     else if(eje == "Z")
     {
       /* code */
-      ejeZ.moveToPositionInMillimeters(milimeters.toFloat());
+      // ejeZ.setStepsPerMillimeter(25 * 1);
+      ejeZ.setSpeedInMillimetersPerSecond(9.0);
+      ejeZ.setAccelerationInMillimetersPerSecondPerSecond(10.0);
+      ejeZ.moveToPositionInMillimeters(milimeters);
       response = 1;
     }else{
       response = 0;
@@ -74,10 +80,10 @@
   }
 
   float Grua::getStepsPerMilimeterX(){
-    return StepsPerMilimeterX;
+     return ejeX.getCurrentVelocityInStepsPerSecond();
   }
   void Grua::setStepsPerMilimeterX(float value){
-    StepsPerMilimeterX = value;
+    // StepsPerMilimeterX = value;
   }
 
   // void Grua::SetSpeed(int x = 40, int y = 40, int z = 20)
