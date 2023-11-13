@@ -25,6 +25,7 @@ void loop() {
     {
       response = gruaNexArise.MoveInMilimeters(comunicador.GetEje(), comunicador.GetMilimeters());
       delay(300);
+      Serial.print("Done");
     }
     else if (comunicador.GetMode() == "Manual")
     {
@@ -41,7 +42,6 @@ void loop() {
 
     }
 
-    Serial.print("Done");
 
   }
 
