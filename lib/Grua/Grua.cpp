@@ -12,9 +12,9 @@
 
     digitalWrite(STEPPERS_ENABLE_PIN, LOW);     // be sure to do this
 
-    ejeX.setStepsPerMillimeter(25 * 1);
-    ejeY.setStepsPerMillimeter(25 * 1);
-    ejeZ.setStepsPerMillimeter(25 * 1);
+    ejeX.setStepsPerMillimeter(172);
+    ejeY.setStepsPerMillimeter(172);
+    ejeZ.setStepsPerMillimeter(172);
   }
   void Grua::Inicializar()
   {
@@ -28,8 +28,8 @@
     {
       /* code */
       // ejeX.setStepsPerMillimeter(25 * 1);
-      ejeX.setSpeedInMillimetersPerSecond(9.0);
-      ejeX.setAccelerationInMillimetersPerSecondPerSecond(10.0);
+      ejeX.setSpeedInMillimetersPerSecond(40.0);
+      ejeX.setAccelerationInMillimetersPerSecondPerSecond(20.0);
       ejeX.moveToPositionInMillimeters(milimeters);
       response = 1;
     }
@@ -37,8 +37,8 @@
     {
       /* code */
       // ejeY.setStepsPerMillimeter(25 * 1);
-      ejeY.setSpeedInMillimetersPerSecond(9.0);
-      ejeY.setAccelerationInMillimetersPerSecondPerSecond(10.0);
+      ejeY.setSpeedInMillimetersPerSecond(40.0);
+      ejeY.setAccelerationInMillimetersPerSecondPerSecond(20.0);
       ejeY.moveToPositionInMillimeters(milimeters);
       response = 1;
     }
@@ -46,7 +46,7 @@
     {
       /* code */
       // ejeZ.setStepsPerMillimeter(25 * 1);
-      ejeZ.setSpeedInMillimetersPerSecond(9.0);
+      ejeZ.setSpeedInMillimetersPerSecond(30.0);
       ejeZ.setAccelerationInMillimetersPerSecondPerSecond(10.0);
       ejeZ.moveToPositionInMillimeters(milimeters);
       response = 1;
